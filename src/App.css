@@ -1,42 +1,70 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+:root {
+  font-family: system-ui, sans-serif;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f2f5;
+}
+.card {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  width: 90%;
+  max-width: 700px;
   text-align: center;
 }
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+h1 {
+  font-size: 2rem;
+  color: #333;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.nps-scores {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 2rem 0;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.nps-scores button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  background: #f9f9f9;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
 }
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.nps-scores button:hover {
+  background: #e0e0e0;
+  transform: translateY(-5px);
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.nps-labels {
+  display: flex;
+  justify-content: space-between;
+  color: #666;
 }
-
-.card {
-  padding: 2em;
+textarea {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 1rem;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
 }
-
-.read-the-docs {
-  color: #888;
+.submit-button {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 1.2rem;
+  font-size: 1.5rem;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.submit-button:disabled {
+  background-color: #aaa;
 }

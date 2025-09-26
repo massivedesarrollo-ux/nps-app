@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import './App.css';
 
-// Reemplaza las líneas de configuración de Supabase:
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey); // <-- ¡ESTA ES LA LÍNEA CLAVE!
 
 // IDENTIFICADOR ÚNICO DE ESTA TABLET
 const LOCATION_ID = 'CABALLERIZAS_01'; 
