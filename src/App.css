@@ -1,70 +1,124 @@
 :root {
-  font-family: system-ui, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --background-color: #f4f6f8;
+  --card-background: #ffffff;
+  --text-color: #2c3e50;
+  --dimmed-text-color: #7f8c8d;
+  --red: #e74c3c;
+  --yellow: #f1c40f;
+  --green: #2ecc71;
+  --border-color: #ecf0f1;
 }
+
 body {
+  margin: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.app-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #f0f2f5;
+  padding: 20px;
 }
-.card {
-  background: white;
-  padding: 2.5rem;
+
+.survey-card {
+  background: var(--card-background);
+  padding: 3rem 3.5rem;
   border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-  width: 90%;
-  max-width: 700px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border-color);
+  width: 100%;
+  max-width: 800px;
   text-align: center;
 }
+
 h1 {
-  font-size: 2rem;
-  color: #333;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 2.5rem;
 }
+
+/* --- Estilos NPS --- */
 .nps-scores {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   gap: 0.5rem;
-  margin: 2rem 0;
+  margin: 2.5rem 0 1rem 0;
 }
+
 .nps-scores button {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  border: 2px solid #ccc;
-  background: #f9f9f9;
+  border: 2px solid var(--border-color);
+  background: transparent;
+  color: var(--text-color);
   font-size: 1.5rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.25s ease-in-out;
 }
+
 .nps-scores button:hover {
-  background: #e0e0e0;
-  transform: translateY(-5px);
+  background-color: var(--border-color);
+  transform: scale(1.1);
 }
+
+/* Colores de selección */
+.nps-scores button.selected.red { background-color: var(--red); color: white; border-color: var(--red); }
+.nps-scores button.selected.yellow { background-color: var(--yellow); color: white; border-color: var(--yellow); }
+.nps-scores button.selected.green { background-color: var(--green); color: white; border-color: var(--green); }
+
+/* Efecto para los no seleccionados */
+.nps-scores.selection-made button.dimmed {
+  opacity: 0.5;
+  transform: scale(0.9);
+}
+
 .nps-labels {
   display: flex;
   justify-content: space-between;
-  color: #666;
+  color: var(--dimmed-text-color);
 }
-textarea {
-  width: 100%;
-  margin-top: 1rem;
-  padding: 1rem;
-  font-size: 1.2rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+
+/* --- Estilos Preguntas Adicionales --- */
+.additional-questions { margin: 1.5rem 0; text-align: left; }
+.question-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--border-color);
 }
+.question-item:first-child { border-top: 1px solid var(--border-color); }
+.question-item span { font-size: 1.1rem; font-weight: 500; }
+.star-rating span { font-size: 2rem; color: #dce4e8; cursor: pointer; transition: color 0.2s; }
+.star-rating span.on, .star-rating:hover span { color: var(--yellow); }
+.star-rating:hover span:hover ~ span { color: #dce4e8; }
+
+.comment-label { display: block; text-align: left; font-weight: 600; margin-top: 2rem; margin-bottom: 0.5rem; }
+textarea { width: calc(100% - 2rem); padding: 1rem; font-size: 1rem; font-family: inherit; border-radius: 8px; border: 1px solid var(--border-color); resize: vertical; }
+textarea:focus { border-color: var(--text-color); outline: none; }
+
 .submit-button {
-  margin-top: 1.5rem;
+  margin-top: 2.5rem;
   width: 100%;
-  padding: 1.2rem;
-  font-size: 1.5rem;
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
   color: white;
-  background-color: #007bff;
+  background-color: var(--text-color);
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.2s;
 }
-.submit-button:disabled {
-  background-color: #aaa;
-}
+.submit-button:hover { background-color: #000; }
+.submit-button:disabled { background-color: #ccc; }
+
+/* --- Mensaje de Gracias --- */
+.thank-you-message h2 { font-size: 2rem; }
