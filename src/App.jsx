@@ -160,6 +160,15 @@ function App() {
           <div className="progress-bar" style={{ width: step === 1 ? '50%' : '100%' }}></div>
         </div>
       </div>
+      <footer className="app-footer">
+        <img src="/Logo_Massive.png" alt="Massive Tech Logo" className="footer-logo" />
+        <div className="footer-text">
+          <p>Desarrollado por Massive Tech &copy; {new Date().getFullYear()}</p>
+          <p>
+            <span>Tel: +593 123 456 789</span> | <a href="https://massivetech-ec.com/" target="_blank" rel="noopener noreferrer" className="footer-link">Conoce nuestra página</a>
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }

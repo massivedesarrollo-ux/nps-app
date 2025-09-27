@@ -188,3 +188,42 @@ textarea:focus { border-color: var(--primary-color); outline: none; box-shadow: 
   from { transform: scale(0); }
   to { transform: scale(1); }
 }
+
+/* --- Estilos del Footer --- */
+.app-footer {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  padding: 10px;
+}
+
+.footer-logo {
+  height: 40px;
+}
+
+.footer-text {
+  color: white;
+  text-align: left;
+  font-size: 0.8rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.footer-text p {
+  margin: 0;
+  padding: 2px 0;
+}
+
+.footer-link {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
