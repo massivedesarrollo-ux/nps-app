@@ -1,18 +1,16 @@
 :root {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  --background-color: #f4f6f8;
-  --card-background: #ffffff;
-  --text-color: #2c3e50;
-  --dimmed-text-color: #7f8c8d;
-  --red: #e74c3c;
-  --yellow: #f1c40f;
-  --green: #2ecc71;
-  --border-color: #ecf0f1;
+  --text-color: #1a202c;
+  --primary-color: #3182ce;
+  --red: #e53e3e;
+  --yellow: #dd6b20;
+  --green: #38a169;
+  --border-color: rgba(255, 255, 255, 0.4);
+  --card-background: rgba(255, 255, 255, 0.75);
 }
 
 body {
   margin: 0;
-  background-color: var(--background-color);
   color: var(--text-color);
 }
 
@@ -22,17 +20,34 @@ body {
   align-items: center;
   min-height: 100vh;
   padding: 20px;
+  /* Reemplaza esta URL con una imagen de alta calidad del rancho */
+  background-image: url('https://images.unsplash.com/photo-1594756549843-55b3ce4146a4?q=80&w=2070&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
 }
 
 .survey-card {
   background: var(--card-background);
   padding: 3rem 3.5rem;
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
   width: 100%;
   max-width: 800px;
   text-align: center;
+  overflow: hidden; /* Para contener las animaciones */
+}
+
+.step-content {
+  opacity: 1;
+}
+.step-content.slide-in {
+  animation: slideIn 0.3s ease-out forwards;
+}
+.step-content.slide-out {
+  animation: slideOut 0.3s ease-in forwards;
 }
 
 h1 {
@@ -42,83 +57,89 @@ h1 {
   margin-bottom: 2.5rem;
 }
 
-/* --- Estilos NPS --- */
+/* --- Estilos NPS (con mejoras) --- */
 .nps-scores {
   display: flex;
   justify-content: space-between;
   gap: 0.5rem;
   margin: 2.5rem 0 1rem 0;
 }
-
 .nps-scores button {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  border: 2px solid var(--border-color);
+  border: 2px solid #cbd5e0;
   background: transparent;
   color: var(--text-color);
   font-size: 1.5rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.25s ease-in-out;
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-
 .nps-scores button:hover {
-  background-color: var(--border-color);
-  transform: scale(1.1);
+  background-color: rgba(0,0,0,0.05);
+  transform: scale(1.15);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
+.nps-scores button.selected.red { background-color: var(--red); color: white; border-color: var(--red); transform: scale(1.1); box-shadow: 0 4px 12px rgba(229, 62, 62, 0.4); }
+.nps-scores button.selected.yellow { background-color: var(--yellow); color: white; border-color: var(--yellow); transform: scale(1.1); box-shadow: 0 4px 12px rgba(221, 107, 34, 0.4); }
+.nps-scores button.selected.green { background-color: var(--green); color: white; border-color: var(--green); transform: scale(1.1); box-shadow: 0 4px 12px rgba(56, 161, 105, 0.4); }
+.nps-scores.selection-made button.dimmed { opacity: 0.4; transform: scale(0.9); }
+.nps-labels { display: flex; justify-content: space-between; color: #718096; }
 
-/* Colores de selección */
-.nps-scores button.selected.red { background-color: var(--red); color: white; border-color: var(--red); }
-.nps-scores button.selected.yellow { background-color: var(--yellow); color: white; border-color: var(--yellow); }
-.nps-scores button.selected.green { background-color: var(--green); color: white; border-color: var(--green); }
-
-/* Efecto para los no seleccionados */
-.nps-scores.selection-made button.dimmed {
-  opacity: 0.5;
-  transform: scale(0.9);
-}
-
-.nps-labels {
-  display: flex;
-  justify-content: space-between;
-  color: var(--dimmed-text-color);
-}
-
-/* --- Estilos Preguntas Adicionales --- */
+/* --- Estilos Preguntas Adicionales (con mejoras) --- */
 .additional-questions { margin: 1.5rem 0; text-align: left; }
-.question-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.25rem 0;
-  border-bottom: 1px solid var(--border-color);
-}
-.question-item:first-child { border-top: 1px solid var(--border-color); }
+.question-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid #e2e8f0; }
+.question-item:first-child { border-top: 1px solid #e2e8f0; }
 .question-item span { font-size: 1.1rem; font-weight: 500; }
-.star-rating span { font-size: 2rem; color: #dce4e8; cursor: pointer; transition: color 0.2s; }
-.star-rating span.on, .star-rating:hover span { color: var(--yellow); }
-.star-rating:hover span:hover ~ span { color: #dce4e8; }
+.star-rating span { font-size: 2rem; color: #cbd5e0; cursor: pointer; transition: all 0.2s; }
+.star-rating span:hover { transform: scale(1.3); }
+.star-rating span.on, .star-rating:hover span { color: #f6e05e; }
+.star-rating:hover span:hover ~ span { color: #cbd5e0; }
 
 .comment-label { display: block; text-align: left; font-weight: 600; margin-top: 2rem; margin-bottom: 0.5rem; }
-textarea { width: calc(100% - 2rem); padding: 1rem; font-size: 1rem; font-family: inherit; border-radius: 8px; border: 1px solid var(--border-color); resize: vertical; }
-textarea:focus { border-color: var(--text-color); outline: none; }
+textarea { width: calc(100% - 2rem); padding: 1rem; font-size: 1rem; font-family: inherit; border-radius: 8px; border: 1px solid #e2e8f0; resize: vertical; }
+textarea:focus { border-color: var(--primary-color); outline: none; box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.2); }
 
-.submit-button {
-  margin-top: 2.5rem;
+.submit-button { margin-top: 2.5rem; width: 100%; padding: 1rem; font-size: 1.1rem; font-weight: bold; color: white; background-color: var(--primary-color); border: none; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+.submit-button:hover { background-color: #2b6cb0; box-shadow: 0 4px 12px rgba(49, 130, 206, 0.3); transform: translateY(-2px); }
+.submit-button:disabled { background-color: #a0aec0; }
+
+/* --- Pantalla de Gracias (mejorada) --- */
+.thank-you-message h2 { font-size: 2rem; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+.thank-you-message p { color: #4a5568; }
+
+/* --- Barra de Progreso --- */
+.progress-bar-container {
   width: 100%;
-  padding: 1rem;
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: white;
-  background-color: var(--text-color);
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.2s;
+  background-color: rgba(0,0,0,0.1);
+  border-radius: 4px;
+  margin-top: 2.5rem;
+  height: 8px;
 }
-.submit-button:hover { background-color: #000; }
-.submit-button:disabled { background-color: #ccc; }
+.progress-bar {
+  height: 100%;
+  background-color: var(--primary-color);
+  border-radius: 4px;
+  transition: width 0.4s ease-out;
+}
 
-/* --- Mensaje de Gracias --- */
-.thank-you-message h2 { font-size: 2rem; }
+/* --- Animaciones de Transición --- */
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+@keyframes slideOut {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(-100%); opacity: 0; }
+}
+
+/* --- Icono de Gracias Animado --- */
+.checkmark-circle { width: 80px; height: 80px; position: relative; display: inline-block; background: var(--green); border-radius: 50%; animation: scaleIn 0.4s ease-in-out; }
+.checkmark-stem { position: absolute; width: 6px; height: 40px; background-color: white; left: 37px; top: 20px; transform: rotate(45deg); }
+.checkmark-kick { position: absolute; width: 6px; height: 20px; background-color: white; left: 25px; top: 45px; transform: rotate(-45deg); }
+
+@keyframes scaleIn {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
