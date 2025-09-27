@@ -207,7 +207,7 @@ textarea:focus { border-color: var(--primary-color); outline: none; box-shadow: 
 }
 
 .footer-text {
-  color: white;
+  color: rgb(12, 7, 7);
   text-align: left;
   font-size: 0.8rem;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
@@ -219,7 +219,7 @@ textarea:focus { border-color: var(--primary-color); outline: none; box-shadow: 
 }
 
 .footer-link {
-  color: white;
+  color: rgb(6, 6, 6);
   font-weight: bold;
   text-decoration: none;
 }

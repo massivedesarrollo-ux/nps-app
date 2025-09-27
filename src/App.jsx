@@ -165,7 +165,7 @@ function App() {
         <div className="footer-text">
           <p>Desarrollado por Massive Tech &copy; {new Date().getFullYear()}</p>
           <p>
-            <span>Tel: +593 123 456 789</span> | <a href="https://massivetech-ec.com/" target="_blank" rel="noopener noreferrer" className="footer-link">Conoce nuestra página</a>
+            <span>Tel: +593 99 833 1145</span> | <a href="https://massivetech-ec.com/" target="_blank" rel="noopener noreferrer" className="footer-link">Conoce nuestra página</a>
           </p>
         </div>
       </footer>
