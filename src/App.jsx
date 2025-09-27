@@ -9,7 +9,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 const LOCATION_ID = 'Squash'; 
 
-// --- Componente de Estrellas (sin cambios) ---
+// --- Componente de Estrellas ---
 const StarRating = ({ rating, onRate }) => (
   <div className="star-rating">{[1, 2, 3, 4, 5].map(star => (<span key={star} className={star <= rating ? 'on' : 'off'} onClick={() => onRate(star)}>★</span>))}</div>
 );
@@ -26,6 +26,7 @@ const initialState = {
 
 function App() {
   const [state, setState] = useState(initialState);
+  const [hoverScore, setHoverScore] = useState(null);
   const { step, loading, selectedScore, ratings, comment, animation } = state;
 
   // --- Lógica para el reinicio automático ---
@@ -74,14 +75,22 @@ function App() {
     }
   };
   
-  const getNpsButtonClass = (num) => {
-    if (selectedScore === null) return '';
-    if (num === selectedScore) {
-      if (num <= 6) return 'selected red';
-      if (num <= 8) return 'selected yellow';
-      return 'selected green';
+  // Lógica de clases para la nueva barra segmentada
+  const getSegmentClass = (num) => {
+    const score = hoverScore !== null ? hoverScore : selectedScore;
+    if (score === null) return '';
+
+    let classes = '';
+    if (num <= score) {
+      classes += ' filled';
+      if (score <= 6) classes += ' red';
+      else if (score <= 8) classes += ' yellow';
+      else classes += ' green';
     }
-    return 'dimmed';
+    if (num === score) {
+      classes += ' active';
+    }
+    return classes;
   };
 
   const renderStepContent = () => {
@@ -90,12 +99,29 @@ function App() {
         return (
           <>
             <h1>¿Qué tan probable es que recomiendes la zona de "{LOCATION_ID}"?</h1>
-            <div className={`nps-scores ${selectedScore !== null ? 'selection-made' : ''}`}>
-              {[...Array(11).keys()].map(num => (
-                <button key={num} className={getNpsButtonClass(num)} onClick={() => handleNpsSelect(num)}>{num}</button>
-              ))}
+            <div className="nps-bar-container" onMouseLeave={() => setHoverScore(null)}>
+              <div className="nps-segmented-bar">
+                {[...Array(11).keys()].map(num => (
+                  <div 
+                    key={num}
+                    className={`nps-segment ${getSegmentClass(num)}`}
+                    onClick={() => handleNpsSelect(num)}
+                    onMouseEnter={() => setHoverScore(num)}
+                  >
+                    <span>{num}</span>
+                  </div>
+                ))}
+              </div>
+              {hoverScore !== null && (
+                <div className="nps-tooltip" style={{ left: `${(hoverScore / 10) * 100}%` }}>
+                  {hoverScore}
+                </div>
+              )}
             </div>
-            <div className="nps-labels"><span>Nada Probable</span><span>Muy Probable</span></div>
+            <div className="nps-labels">
+              <span>Nada Probable</span>
+              <span>Muy Probable</span>
+            </div>
           </>
         );
       case 2:
